@@ -1,0 +1,63 @@
+@use '@angular/material' as mat;
+@import '~@angular/material/theming';
+
+
+@include mat.core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$app-yellow: (
+  50 : #fcf7e5,
+  100 : #f7ebbf,
+  200 : #f2de94,
+  300 : #ecd169,
+  400 : #e8c749,
+  500 : #e4bd29,
+  600 : #e1b724,
+  700 : #ddae1f,
+  800 : #d9a619,
+  900 : #d1980f,
+  A100 : #fffffe,
+  A200 : #ffeecb,
+  A400 : #ffde98,
+  A700 : #ffd67f,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$app-primary: mat.define-palette(mat.$blue-palette);
+$app-accent: mat.define-palette($app-yellow, 600, A100, A200);
+$app-warn: mat.define-palette(mat.$red-palette);
+
+$app-theme: mat.define-light-theme((
+  color: (
+    primary: $app-primary,
+    accent: $app-accent,
+    warn: $app-warn,
+  )
+));
+
+@include mat.all-component-themes($app-theme);
+
+
+$primary: map-get($app-theme, primary);
+$accent: map-get($app-theme, accent);
+
+:root {
+  --color-primary: #{mat-color($app-primary)};
+  --color-accent: #{mat-color($app-accent)};
+  --color-warn: #{mat-color($app-warn)};
+}
